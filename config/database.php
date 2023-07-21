@@ -48,9 +48,12 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+/*            'database' => env('DB_DATABASE', 'forge'), */ 
+            'database' => config('database.connections.mysql.database'),
+/*            'username' => env('DB_USERNAME', 'forge'), */
+            'username' => config('database.connections.mysql.username'),
+/*            'password' => env('DB_PASSWORD', ''), */
+            'password' => config('database.connections.mysql.password'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

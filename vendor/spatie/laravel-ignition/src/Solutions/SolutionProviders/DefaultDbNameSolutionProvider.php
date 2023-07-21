@@ -21,7 +21,7 @@ class DefaultDbNameSolutionProvider implements HasSolutionsForThrowable
             return false;
         }
 
-        if (! in_array(env('DB_DATABASE'), ['homestead', 'laravel'])) {
+        if (! in_array(config('database.connections.mysql.database'), ['homestead', 'laravel'])) {
             return false;
         }
 

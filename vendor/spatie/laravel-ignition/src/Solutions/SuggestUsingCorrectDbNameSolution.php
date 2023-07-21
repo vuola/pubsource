@@ -13,7 +13,7 @@ class SuggestUsingCorrectDbNameSolution implements Solution
 
     public function getSolutionDescription(): string
     {
-        $defaultDatabaseName = env('DB_DATABASE');
+        $defaultDatabaseName = config('database.connections.mysql.database');
 
         return "You're using the default database name `$defaultDatabaseName`. This database does not exist.\n\nEdit the `.env` file and use the correct database name in the `DB_DATABASE` key.";
     }
