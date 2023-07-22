@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # create DB_HOST
-node_name="${NODE_NAME}.local"
+mariadb_host="${MARIADB_SERVICE_HOST}"
 
 # create APP_URL
+node_name="${NODE_NAME}.local"
 node_url="http://$node_name"
 
 # run replacements
-sed "s|NODE_NAME|$node_name|g; s|NODE_URL|$node_url|g" .env.example > .env
+sed "s|MARIADB_HOST|$mariadb_host|g; s|NODE_URL|$node_url|g" .env.example > .env
 
 # create APP_KEY
 php artisan key:generate
