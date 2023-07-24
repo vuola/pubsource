@@ -1,0 +1,56 @@
+data_item: "information of measured variable"
+  data_item_id: "primary key"
+  data_multiplier: "database value multiplied by . to get actual value"
+  data_unit: "unit SI symbol"
+  _device_id: "ONE data_item - MANY device"
+
+device: "instance of a device"
+  device_id: "primary key"
+  device_location_description: "description of detailed mounting spot"
+  device_IP_address: "IP address used in Modbus TCP/IP or CRUD requests"
+  device_IP_port: "IP port number used in Modbus TCP/IP or CRUD requests"
+  device_RTU_address: "Modbus RTU address of device"
+  _device_type_id: "MANY device - ONE device_type"
+  _site_id: "MANY device - ONE site"
+
+site: "PV system location"
+  site_id: "primary key"
+  site_name: "descriptive name"
+  site_coordinates: "coordinate string"
+
+data: "data payload row, single parameter"
+  data_id: "primary key"
+  data_timestamp: "standard TIMESTAMP at time of database write"
+  data_value: "measured value as DOUBLE"
+  _data_item_id: "MANY data - ONE data_item"
+
+collector: "data collection container instance"
+  collector_id: "primary key" 
+  collector_name: "Unique container name 'collector_type_name'+'_'+'collector_id'"
+  collector_status: "planned / standby / active / deleted"
+  _collector_type_id: "MANY collector - ONE collector_type"
+
+cron_event: "metadata of crontab row for single data item"
+  cron_event_id: "primary key"
+  cron_mask: "timing string in cron format"
+  _collector_id: "MANY cron_event - ONE collector"
+  _data_item_id: "ONE cron_event - ONE data_item"
+
+collector_type: "standard data collection image for a device type"
+  collector_type_id: "primary key"
+  collector_platform: "Kubernetes / Docker"
+  collector_protocol: "Mb_RTU / Mb_TCP_IP / API"
+  collector_type_name: "Unique image name 'device_type_name'+'_'+'collector_protocol'"
+  collector_image: "valid image repository reference"
+  collector_deploy: "Linux deployment command"
+  collector_decomission: "Linux decommission command"
+
+device_type:
+  device_type_id: "primary key"
+  device_type_name: "Manufacturer's device type name"
+  device_type_picture: "Library photo of device type"
+  _collector_type_id: "ONE device_type - MANY collector_type" 
+
+
+
+
