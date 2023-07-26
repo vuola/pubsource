@@ -34,12 +34,6 @@ CREATE TABLE devices (
     FOREIGN KEY (site_id) REFERENCES sites(id)
 );
 
-CREATE TABLE variables (
-    id INT PRIMARY KEY,
-    variable_multiplier DECIMAL(10, 2),
-    variable_unit VARCHAR(50)
-);
-
 CREATE TABLE images (
     id INT PRIMARY KEY,
     image_platform VARCHAR(20),
@@ -57,6 +51,12 @@ CREATE TABLE collectors (
     device_id INT,
     FOREIGN KEY (image_id) REFERENCES images(id),
     FOREIGN KEY (device_id) REFERENCES devices(id)
+);
+
+CREATE TABLE variables (
+    id INT PRIMARY KEY,
+    variable_multiplier DECIMAL(10, 2),
+    variable_unit VARCHAR(50)
 );
 
 CREATE TABLE headers (

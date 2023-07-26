@@ -27,11 +27,6 @@ devices: "instance of a product"
   product_id: "MANY devices - ONE product"
   site_id: "MANY devices - ONE site"
 
-variables: "information of measured variable"
-  id: "primary key"
-  variable_multiplier: "database value multiplied by . to get actual value"
-  variable_unit: "unit SI symbol"
-
 images: "standard data collection image for a device type and protocol"
   id: "primary key"
   image_platform: "Kubernetes / Docker"
@@ -46,6 +41,11 @@ collectors: "data collection container instance"
   collector_status: "planned / standby / active / deleted"
   image_id: "MANY collectors - ONE image"
   device_id: ONE collector - ONE device"
+
+variables: "information of measured variable"
+  id: "primary key"
+  variable_multiplier: "database value multiplied by . to get actual value"
+  variable_unit: "unit SI symbol"
 
 headers: "data row headers with all parameters sharing the same timestamp"
   id: "primary key"
