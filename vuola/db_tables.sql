@@ -1,68 +1,77 @@
-CREATE TABLE data_item (
-    data_item_id INT PRIMARY KEY,
-    data_multiplier DECIMAL(10, 2),
-    data_unit VARCHAR(50),
-    _device_id INT,
-    FOREIGN KEY (_device_id) REFERENCES device(device_id)
+CREATE TABLE sites (
+    id INT PRIMARY KEY,
+    site_name VARCHAR(100),
+    site_latitude DOUBLE,
+    site_longitude DOUBLE,
+    user_id INT
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE device (
-    device_id INT PRIMARY KEY,
+CREATE TABLE products (
+    id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    product_picture VARCHAR(255),
+    product_default_protocol VARCHAR(255),
+    product_default_IP_address VARCHAR(15),
+    product_default_IP_port INT,
+    product_default_RTU_address INT,
+    product_default_variables JSON,
+    image_id INT,
+    FOREIGN KEY (image_id) REFERENCES images(id)
+);
+
+CREATE TABLE devices (
+    id INT PRIMARY KEY,
     device_location_description VARCHAR(255),
+    device_protocol VARCHAR(255),
     device_IP_address VARCHAR(15),
     device_IP_port INT,
     device_RTU_address INT,
-    _device_type_id INT,
-    _site_id INT,
-    FOREIGN KEY (_device_type_id) REFERENCES device_type(device_type_id),
-    FOREIGN KEY (_site_id) REFERENCES site(site_id)
+    device_variables JSON,
+    product_id INT,
+    site_id INT,
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (site_id) REFERENCES sites(id)
 );
 
-CREATE TABLE site (
-    site_id INT PRIMARY KEY,
-    site_name VARCHAR(100),
-    site_coordinates VARCHAR(50)
+CREATE TABLE variables (
+    id INT PRIMARY KEY,
+    variable_multiplier DECIMAL(10, 2),
+    variable_unit VARCHAR(50)
 );
 
-CREATE TABLE data (
-    data_id INT PRIMARY KEY,
-    data_timestamp TIMESTAMP,
-    data_value DOUBLE,
-    _data_item_id INT,
-    FOREIGN KEY (_data_item_id) REFERENCES data_item(data_item_id)
+CREATE TABLE images (
+    id INT PRIMARY KEY,
+    image_platform VARCHAR(20),
+    image_protocol VARCHAR(20),
+    image_name VARCHAR(255),
+    image_deploy VARCHAR(255),
+    image_decomission VARCHAR(255)
 );
 
-CREATE TABLE collector (
-    collector_id INT PRIMARY KEY,
+CREATE TABLE collectors (
+    id INT PRIMARY KEY,
     collector_name VARCHAR(255),
     collector_status VARCHAR(20),
-    _collector_type_id INT,
-    FOREIGN KEY (_collector_type_id) REFERENCES collector_type(collector_type_id)
+    image_id INT,
+    device_id INT,
+    FOREIGN KEY (image_id) REFERENCES images(id),
+    FOREIGN KEY (device_id) REFERENCES devices(id)
 );
 
-CREATE TABLE cron_event (
-    cron_event_id INT PRIMARY KEY,
-    cron_mask VARCHAR(50),
-    _collector_id INT,
-    _data_item_id INT,
-    FOREIGN KEY (_collector_id) REFERENCES collector(collector_id),
-    FOREIGN KEY (_data_item_id) REFERENCES data_item(data_item_id)
+CREATE TABLE headers (
+    id INT PRIMARY KEY,
+    row_timestamp TIMESTAMP,
+    device_id INT,
+    FOREIGN KEY (device_id) REFERENCES devices(id)    
 );
 
-CREATE TABLE collector_type (
-    collector_type_id INT PRIMARY KEY,
-    collector_platform VARCHAR(20),
-    collector_protocol VARCHAR(20),
-    collector_type_name VARCHAR(100),
-    collector_image VARCHAR(255),
-    collector_deploy VARCHAR(255),
-    collector_decomission VARCHAR(255)
+CREATE TABLE datas (
+    id INT PRIMARY KEY,
+    data_value DOUBLE,
+    variable_id INT,
+    header_id INT,
+    FOREIGN KEY (variable_id) REFERENCES variables(id),
+    FOREIGN KEY (header_id) REFERENCES headers(id)
 );
 
-CREATE TABLE device_type (
-    device_type_id INT PRIMARY KEY,
-    device_type_name VARCHAR(100),
-    device_type_picture VARCHAR(255),
-    _collector_type_id INT,
-    FOREIGN KEY (_collector_type_id) REFERENCES collector_type(collector_type_id)
-);
