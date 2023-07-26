@@ -15,7 +15,7 @@ CREATE TABLE products (
     product_default_IP_address VARCHAR(15),
     product_default_IP_port INT,
     product_default_RTU_address INT,
-    product_default_variables JSON,
+    product_default_schema JSON,
     image_id INT,
     FOREIGN KEY (image_id) REFERENCES images(id)
 );
@@ -27,7 +27,7 @@ CREATE TABLE devices (
     device_IP_address VARCHAR(15),
     device_IP_port INT,
     device_RTU_address INT,
-    device_variables JSON,
+    device_schema JSON,
     product_id INT,
     site_id INT,
     FOREIGN KEY (product_id) REFERENCES products(id),

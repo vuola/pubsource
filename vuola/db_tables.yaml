@@ -13,7 +13,7 @@ products:
   product_default_IP_address: "IP address used in Modbus TCP/IP or CRUD requests"
   product_default_IP_port: "IP port number used in Modbus TCP/IP or CRUD requests"
   product_default_RTU_address: "Modbus RTU address of device"
-  product_default_variables: "JSON array, default variable schema"
+  product_default_schema: "JSON array, default variable schema"
   image_id: "ONE product - MANY images" 
 
 devices: "instance of a product"
@@ -23,7 +23,7 @@ devices: "instance of a product"
   device_IP_address: "IP address used in Modbus TCP/IP or CRUD requests"
   device_IP_port: "IP port number used in Modbus TCP/IP or CRUD requests"
   device_RTU_address: "Modbus RTU address of device"
-  device_variables:  "JSON array, deployed variable schema"
+  device_schema:  "JSON array, deployed variable schema"
   product_id: "MANY devices - ONE product"
   site_id: "MANY devices - ONE site"
 

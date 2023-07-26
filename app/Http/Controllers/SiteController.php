@@ -73,16 +73,10 @@ class SiteController extends Controller
 
         $validated = $request->validate([
             'site_name' => 'required|string|max:100',
-        ]);
-
-        $validated = $request->validate([
             'site_longitude' => 'required|numeric|between:-180,180',
-        ]);
-
-        $validated = $request->validate([
             'site_latitude' => 'required|numeric|between:-90,90',
         ]);
-         
+          
         $site->update($validated);
         
         return redirect(route('sites.index'));        
