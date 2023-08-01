@@ -7,6 +7,15 @@ CREATE TABLE sites (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+CREATE TABLE images (
+    id INT PRIMARY KEY,
+    image_platform VARCHAR(20),
+    image_protocol VARCHAR(20),
+    image_name VARCHAR(255),
+    image_deploy VARCHAR(255),
+    image_decomission VARCHAR(255)
+);
+
 CREATE TABLE products (
     id INT PRIMARY KEY,
     product_name VARCHAR(100),
@@ -34,15 +43,6 @@ CREATE TABLE devices (
     FOREIGN KEY (site_id) REFERENCES sites(id)
 );
 
-CREATE TABLE images (
-    id INT PRIMARY KEY,
-    image_platform VARCHAR(20),
-    image_protocol VARCHAR(20),
-    image_name VARCHAR(255),
-    image_deploy VARCHAR(255),
-    image_decomission VARCHAR(255)
-);
-
 CREATE TABLE collectors (
     id INT PRIMARY KEY,
     collector_name VARCHAR(255),
@@ -55,6 +55,7 @@ CREATE TABLE collectors (
 
 CREATE TABLE variables (
     id INT PRIMARY KEY,
+    variable_name VARCHAR(255),
     variable_multiplier DECIMAL(10, 2),
     variable_unit VARCHAR(50)
 );

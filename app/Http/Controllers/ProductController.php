@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         return view('products.index', [
             'products' => Product::with('user')->latest()->get(),
@@ -33,7 +34,7 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'product_name' => 'required|string|max:100',
-            'product_picture' => 'required|string|max:255',
+            'product_picture' => 'string|max:255',
             'product_default_protocol' => 'required|string|max:255',
             'product_default_IP_address' => 'ip',
             'product_default_IP_port' => 'integer|between:1,65535',

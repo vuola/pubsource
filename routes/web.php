@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,10 @@ Route::resource('chirps', ChirpController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('sites', SiteController::class)
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('images', ImageController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
