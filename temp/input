@@ -1,0 +1,17 @@
+Fronius SYMO
+
+fronius_symo.jpeg
+
+Mb_TCP
+
+192.168.1.20
+
+510
+
+2
+
+{
+	"name": ["PV output", "Power from grid", "PPV power"], 
+	"multiplier": [1,1,1], 
+	"unit": ["W", "W", "W"]
+}

@@ -10,9 +10,9 @@ class SecretServiceProvider extends ServiceProvider
     {
         // Load secrets and set them in the configuration
         config([
-            'database.connections.mysql.username' => trim(file_get_contents('/secret/mariadb-user')),
-            'database.connections.mysql.password' => trim(file_get_contents('/secret/mariadb-password')),
-            'database.connections.mysql.database' => trim(file_get_contents('/secret/mariadb-database')),
+            'database.connections.mysql.username' => trim(file_get_contents('/var/secret/mariadb-user')),
+            'database.connections.mysql.password' => trim(file_get_contents('/var/secret/mariadb-password')),
+            'database.connections.mysql.database' => trim(file_get_contents('/var/secret/mariadb-database')),
             // Add other secrets as needed
         ]);
     }

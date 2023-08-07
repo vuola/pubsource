@@ -1,0 +1,11 @@
+Kubernetes
+
+Mb_TCP
+
+docker.io/vuolahti/fronius_symo/Mb_TCP:latest
+
+docker run -it --image docker.io/vuolahti/fronius_symo/Mb_TCP:latest --name fronius_symo_Mb_TCP
+
+docker kill fronius_symo_Mb_TCP
+
+1

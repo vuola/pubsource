@@ -3,7 +3,7 @@ CREATE TABLE sites (
     site_name VARCHAR(100),
     site_latitude DOUBLE,
     site_longitude DOUBLE,
-    user_id INT
+    user_id INT,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -13,7 +13,9 @@ CREATE TABLE images (
     image_protocol VARCHAR(20),
     image_name VARCHAR(255),
     image_deploy VARCHAR(255),
-    image_decomission VARCHAR(255)
+    image_decomission VARCHAR(255),
+    product_id INT,
+    FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
 CREATE TABLE products (
@@ -24,9 +26,7 @@ CREATE TABLE products (
     product_default_IP_address VARCHAR(15),
     product_default_IP_port INT,
     product_default_RTU_address INT,
-    product_default_schema JSON,
-    image_id INT,
-    FOREIGN KEY (image_id) REFERENCES images(id)
+    product_default_schema JSON
 );
 
 CREATE TABLE devices (
@@ -37,10 +37,10 @@ CREATE TABLE devices (
     device_IP_port INT,
     device_RTU_address INT,
     device_schema JSON,
-    product_id INT,
     site_id INT,
-    FOREIGN KEY (product_id) REFERENCES products(id),
-    FOREIGN KEY (site_id) REFERENCES sites(id)
+    collector_id INT,
+    FOREIGN KEY (site_id) REFERENCES sites(id),
+    FOREIGN KEY (collector_id) REFERENCES collectors(id)
 );
 
 CREATE TABLE collectors (
@@ -48,9 +48,7 @@ CREATE TABLE collectors (
     collector_name VARCHAR(255),
     collector_status VARCHAR(20),
     image_id INT,
-    device_id INT,
     FOREIGN KEY (image_id) REFERENCES images(id),
-    FOREIGN KEY (device_id) REFERENCES devices(id)
 );
 
 CREATE TABLE variables (

@@ -14,8 +14,8 @@ class ImageController extends Controller
      */
     public function index(): View
     {
-        return view('Image.index', [
-            'images' => Image::with('user')->latest()->get(),
+        return view('images.index', [
+            'images' => Image::latest()->get(),
         ]);
     }
 
@@ -30,9 +30,21 @@ class ImageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'image_platform' => 'required|in:Kubernetes,Docker',
+            'image_protocol' => 'required|in:Mb_RTU,Mb_TCP,API',
+            'image_name' => 'required|string|max:100',
+            'image_deploy' => 'required|string|max:255',
+            'image_decomission' => 'required|string|max:255',
+            'product_id' => 'integer|between:0,65535',
+        ]);
+
+        Image::create($validated);
+
+        return redirect(route('images.index'));
+
     }
 
     /**
@@ -46,9 +58,13 @@ class ImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Image $image)
+    public function edit(Image $image): View
     {
-        //
+        $this->authorize('update', $image);
+
+        return view('images.edit', [
+            'image' => $image,
+        ]);
     }
 
     /**
@@ -56,7 +72,20 @@ class ImageController extends Controller
      */
     public function update(Request $request, Image $image)
     {
-        //
+        $this->authorize('update', $image);
+
+        $validated = $request->validate([
+            'image_platform' => 'required|in:Kubernetes,Docker',
+            'image_protocol' => 'required|in:Mb_RTU,Mb_TCP,API',
+            'image_name' => 'required|string|max:100',
+            'image_deploy' => 'required|string|max:255',
+            'image_decomission' => 'required|string|max:255',
+            'product_id' => 'integer|between:0,65535',
+        ]);
+         
+        $image->update($validated);
+        
+        return redirect(route('images.index'));        
     }
 
     /**
@@ -64,6 +93,10 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        //
+        $this->authorize('delete', $image);
+ 
+        $image->delete();
+ 
+        return redirect(route('images.index'));    
     }
 }

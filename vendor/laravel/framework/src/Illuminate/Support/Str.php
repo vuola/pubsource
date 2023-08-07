@@ -1161,6 +1161,7 @@ class Str
      */
     public static function startsWith($haystack, $needles)
     {
+
         if (! is_iterable($needles)) {
             $needles = [$needles];
         }

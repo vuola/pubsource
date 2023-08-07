@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('product_default_IP_port');
             $table->integer('product_default_RTU_address');
             $table->json('product_default_schema');
-            $table->foreignId('image_id')->constrained();
         });
     }
 
