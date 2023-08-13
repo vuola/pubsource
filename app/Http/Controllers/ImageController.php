@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -57,15 +58,23 @@ class ImageController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     */
-    public function edit(Image $image): View
+     */    
+    public function edit(Image $image)
     {
-        $this->authorize('update', $image);
-
+        $image_platforms = ["Docker", "Kubernetes"];
+        $image_protocols = ["Mb_TCP", "Mb_RTU", "API"];
+        $image_name = $image->image_name;
+        $products = Product::all();
+    
         return view('images.edit', [
             'image' => $image,
+            'image_platforms' => $image_platforms,
+            'image_protocols' => $image_protocols,
+            'image_name' => $image_name,
+            'products' => $products,
         ]);
     }
+
 
     /**
      * Update the specified resource in storage.

@@ -5,6 +5,8 @@ use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\VariableController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +42,10 @@ Route::resource('images', ImageController::class)
 
 Route::resource('products', ProductController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('variables', VariableController::class)
+    ->only(['index', 'store', 'edit', 'update'])
     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {

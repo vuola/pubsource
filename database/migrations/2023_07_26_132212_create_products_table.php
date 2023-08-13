@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('product_name');
             $table->string('product_picture');
-            $table->string('product_default_protocol');
+            $table->enum('product_default_protocol', ['Mb_TCP', 'Mb_RTU', 'API']);
             $table->ipAddress('product_default_IP_address');
             $table->integer('product_default_IP_port');
             $table->integer('product_default_RTU_address');

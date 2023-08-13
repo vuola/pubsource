@@ -1,0 +1,99 @@
+"raw": {
+    "ts":"11/08/2023 13.06.31",
+    "device":"1",
+    "currentBatteryCharge":0,
+    "currentBatteryDischarge":59,
+    "currentBatteryStateOfCharge":100,
+    "gridFeedInOrPowerDrawn":8991.25,
+    "currentPvFeedInActivePower":10652.75
+},
+{
+    "ts":"11/08/2023 13.06.41",
+    "device":"1",
+    "currentBatteryCharge":0,
+    "currentBatteryDischarge":59,
+    "currentBatteryStateOfCharge":100,
+    "gridFeedInOrPowerDrawn":8991.25,
+    "currentPvFeedInActivePower":10652.75
+},
+
+"variable": [
+    {
+        "id":"1",
+        "variable_name":"currentBatteryCharge",
+        "variable_multiplier":"1.0",
+        "variable_unit":"%",
+    },
+    {
+        "id":"2",
+        "variable_name":"currentBatteryDischarge",
+        "variable_multiplier":"1.0",
+        "variable_unit":"W",
+    },
+    {
+        "id":"3",
+        "variable_name":"currentBatteryStateOfCharge",
+        "variable_multiplier":"1.0",
+        "variable_unit":"%",
+    },
+    {
+        "id":"4",
+        "variable_name":"gridFeedInOrPowerDrawn",
+        "variable_multiplier":"1.0",
+        "variable_unit":"W",
+    },
+    {
+        "id":"5",
+        "variable_name":"currentPvFeedInActivePower",
+        "variable_multiplier":"1.0",
+        "variable_unit":"W",
+    }
+],
+
+"header": [
+    {
+        "id":"1",
+        "row_timestamp":"11/08/2023 13.06.31",
+        "device_id":"1",
+    },
+    {
+        "id":"2",
+        "row_timestamp":"11/08/2023 13.06.41",
+        "device_id":"1",
+    },
+    {
+        "id":"3",
+        "row_timestamp":"11/08/2023 13.06.51",
+        "device_id":"1",
+    },
+    {
+        "id":"4",
+        "row_timestamp":"11/08/2023 13.07.01",
+        "device_id":"1",
+    }
+],
+
+"stream": [
+    {
+        "time":"11/08/2023 13.06.31",
+        "device":"1",
+        "data": {
+            "1":"0",
+            "2":"59",
+            "3":"100",
+            "4":"8991.25",
+            "5":"10652.75"
+        }
+    },
+    {
+        "time":"11/08/2023 13.06.41",
+        "device":"1",
+        "data": {
+            "1":"0",
+            "2":"59",
+            "3":"100",
+            "4":"8991.25",
+            "5":"10652.75"
+        }
+    }
+]

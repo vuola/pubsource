@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('images.index')" :active="request()->routeIs('images.index')">
                         {{ __('Images') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('variables.index')" :active="request()->routeIs('images.index')">
+                        {{ __('Variables') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -93,6 +96,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('images.index')" :active="request()->routeIs('images.index')">
                 {{ __('Images') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('variables.index')" :active="request()->routeIs('images.index')">
+                {{ __('Variables') }}
             </x-responsive-nav-link>
         </div>
 

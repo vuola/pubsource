@@ -10,7 +10,7 @@ CREATE TABLE sites (
 CREATE TABLE images (
     id INT PRIMARY KEY,
     image_platform VARCHAR(20),
-    image_protocol VARCHAR(20),
+    image_protocol ENUM('Mb_TCP', 'Mb_RTU', 'API'),
     image_name VARCHAR(255),
     image_deploy VARCHAR(255),
     image_decomission VARCHAR(255),
@@ -22,7 +22,7 @@ CREATE TABLE products (
     id INT PRIMARY KEY,
     product_name VARCHAR(100),
     product_picture VARCHAR(255),
-    product_default_protocol VARCHAR(255),
+    product_default_protocol ENUM('Mb_TCP', 'Mb_RTU', 'API'),
     product_default_IP_address VARCHAR(15),
     product_default_IP_port INT,
     product_default_RTU_address INT,
@@ -32,22 +32,16 @@ CREATE TABLE products (
 CREATE TABLE devices (
     id INT PRIMARY KEY,
     device_location_description VARCHAR(255),
-    device_protocol VARCHAR(255),
+    device_protocol ENUM('Mb_TCP', 'Mb_RTU', 'API'),
     device_IP_address VARCHAR(15),
     device_IP_port INT,
     device_RTU_address INT,
     device_schema JSON,
+    device_collector_name VARCHAR(255),
+    device_collector_status ENUM(null, 'inactive', 'active')
     site_id INT,
-    collector_id INT,
-    FOREIGN KEY (site_id) REFERENCES sites(id),
-    FOREIGN KEY (collector_id) REFERENCES collectors(id)
-);
-
-CREATE TABLE collectors (
-    id INT PRIMARY KEY,
-    collector_name VARCHAR(255),
-    collector_status VARCHAR(20),
     image_id INT,
+    FOREIGN KEY (site_id) REFERENCES sites(id),
     FOREIGN KEY (image_id) REFERENCES images(id),
 );
 

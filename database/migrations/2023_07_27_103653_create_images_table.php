@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('image_platform');
-            $table->string('image_protocol');
+            $table->enum('image_protocol', ['Mb_TCP', 'Mb_RTU', 'API']);
             $table->string('image_name');
             $table->string('image_deploy');
             $table->string('image_decomission');
