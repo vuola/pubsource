@@ -32,12 +32,13 @@
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
             >{{ old('image_decomission') }}</textarea>
             <x-input-error :messages="$errors->get('image_decomission')" class="mt-2" />
-            <textarea
-                name="product_id"
-                placeholder="{{ __('Product ID') }}"
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-            >{{ old('product_id') }}</textarea>
-            <x-input-error :messages="$errors->get('product_id')" class="mt-2" />
+            <label for="product_id">Product</label>
+            <select name="product_id" id="product_id" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                @foreach ($products as $product)
+                    <option value="{{ $product->id }}" @if (old('product_id') === $product->id) selected @endif>{{ $product->product_name }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('product_id')" class="mt-2" />    
             <x-primary-button class="mt-4">{{ __('Save') }}</x-primary-button>
         </form>
 

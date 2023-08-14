@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('device_IP_port');
             $table->integer('device_RTU_address');
             $table->json('device_schema');
-            $table->string('device_collector_name')->unique();
-            $table->enum('device_collector_status',[null, 'inactive', 'active'])->nullable();
+            $table->string('device_collector_name');
+            $table->enum('device_collector_status',['missing', 'stopped', 'active'])->nullable();
             $table->foreignId('site_id')->constrained();
             $table->foreignId('image_id')->constrained();
             $table->timestamps();

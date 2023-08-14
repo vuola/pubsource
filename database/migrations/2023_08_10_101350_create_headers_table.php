@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('headers', function (Blueprint $table) {
             $table->id();
+            $table->timestamp('data_timestamp');
             $table->foreignId('device_id')->constrained();
-            $table->timestamps();
         });
     }
 

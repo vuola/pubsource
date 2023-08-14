@@ -3,16 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use App\Models\Image;
+use App\Models\Site;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class DeviceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        $images = Image::all();
+        $sites = Site::all();
+
+        return view('devices.index', [
+            'devices' => Device::latest()->get(),
+            'images' => $images,
+            'sites' => $sites,
+        ]);
     }
 
     /**
@@ -26,9 +37,22 @@ class DeviceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'device_location_description' => 'required|string|max:255',
+            'device_IP_address' => 'ip',
+            'device_IP_port' => 'integer|between:1,65535',
+            'device_RTU_address' => 'nullable|integer|between:1,180',
+            'device_schema' => 'required|json',
+            'site_id' => 'required|integer|between:0,65535',
+            'image_id' => 'required|integer|between:0,65535',
+        ]);
+
+        Device::create($validated);
+
+        return redirect(route('devices.index'));
+
     }
 
     /**

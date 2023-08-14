@@ -27,7 +27,10 @@
                     <x-nav-link :href="route('images.index')" :active="request()->routeIs('images.index')">
                         {{ __('Images') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('variables.index')" :active="request()->routeIs('images.index')">
+                    <x-nav-link :href="route('devices.index')" :active="request()->routeIs('devices.index')">
+                        {{ __('Devices') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('variables.index')" :active="request()->routeIs('variables.index')">
                         {{ __('Variables') }}
                     </x-nav-link>
                 </div>
@@ -96,6 +99,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('images.index')" :active="request()->routeIs('images.index')">
                 {{ __('Images') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('devices.index')" :active="request()->routeIs('devices.index')">
+                {{ __('Devices') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('variables.index')" :active="request()->routeIs('images.index')">
                 {{ __('Variables') }}

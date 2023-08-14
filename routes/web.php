@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\VariableController;
 
@@ -41,6 +42,10 @@ Route::resource('images', ImageController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('products', ProductController::class)
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('devices', DeviceController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 

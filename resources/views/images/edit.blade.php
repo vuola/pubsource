@@ -51,8 +51,8 @@
             </div>
         </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+    <script type="text/javascript">
         $(document).ready(function() {
             // References to relevant elements
             const imageProtocolInput = $('#image_protocol');

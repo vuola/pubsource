@@ -15,8 +15,11 @@ class ImageController extends Controller
      */
     public function index(): View
     {
+        $products = Product::all();
+
         return view('images.index', [
             'images' => Image::latest()->get(),
+            'products' => $products,
         ]);
     }
 
@@ -89,7 +92,7 @@ class ImageController extends Controller
             'image_name' => 'required|string|max:100',
             'image_deploy' => 'required|string|max:255',
             'image_decomission' => 'required|string|max:255',
-            'product_id' => 'integer|between:0,65535',
+            'product_id' => 'required|integer|between:0,65535',
         ]);
          
         $image->update($validated);

@@ -61,10 +61,10 @@ class DataController extends Controller
         try {
             // Store header in headers table
             $header = new Header();
-            $header->row_timestamp = $request->get('time');
+            $header->data_timestamp = $request->get('time');
             $header->device_id = $request->get('device');
             $header->saveOrFail();
-            $headerId = Header::max('id');
+            $headerId = Header::max('id') ;
 
             // Validate and process the variable IDs and data values
             $dataItems = $request->input('data');
