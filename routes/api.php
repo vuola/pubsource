@@ -19,11 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/datas', [DataController::class, 'index']);
+Route::get('/data', [DataController::class, 'index']);
 
-Route::get('/datas/{N}', [DataController::class, 'indexLatestN']);
+Route::get('/data/{N}', [DataController::class, 'indexLatestN']);
 
-Route::post('/datas', [DataController::class, 'add']);
+Route::post('/data', [DataController::class, 'add']);
 
-Route::delete('/datas/{k}', [DataController::class, 'removeOlderThanK']);
+Route::delete('/data/{k}', [DataController::class, 'removeOlderThanK']);
 

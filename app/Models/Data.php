@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Data extends Model
 {
     use HasFactory;
+
+    protected $table = 'data';
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'data_value',
+        'variable_id',
+        'header_id',
+    ];
 }

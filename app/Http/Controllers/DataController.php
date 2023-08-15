@@ -48,7 +48,6 @@ class DataController extends Controller
     {
         // Validate the incoming JSON structure
         $validator = Validator::make($request->post(), [
-            'time' => 'required|date_format:d/m/Y H.i.s',
             'device' => 'required|integer|exists:devices,id',
             'data' => 'required|array',
             'data.*' => 'required|numeric',
@@ -61,13 +60,12 @@ class DataController extends Controller
         try {
             // Store header in headers table
             $header = new Header();
-            $header->data_timestamp = $request->get('time');
             $header->device_id = $request->get('device');
             $header->saveOrFail();
             $headerId = Header::max('id') ;
 
             // Validate and process the variable IDs and data values
-            $dataItems = $request->input('data');
+            $dataItems = $request->get('data');
             foreach ($dataItems as $variableId => $dataValue) {
                 // Validate variable_id existence
                 $validator = Validator::make(['variable_id' => $variableId], [

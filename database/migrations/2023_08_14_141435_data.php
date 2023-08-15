@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('datas', function (Blueprint $table) {
+        Schema::create('data', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->double('data_value');
             $table->foreignId('variable_id')->constrained();
             $table->foreignId('header_id')->constrained();
