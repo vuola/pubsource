@@ -33,7 +33,7 @@ class DataController extends Controller
      */
     public function indexLatestN($N)
     {
-        $datas = Data::latest()->take($N)->get();
+        $datas = Header::latest()->take($N)->get();
         return response()->json($datas);
     }
 
