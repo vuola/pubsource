@@ -3,13 +3,13 @@
         <form method="POST" action="{{ route('images.update', $image) }}">
             @csrf
             @method('patch')
-            <label for="image_platform">Image Platform</label>
-            <select name="image_platform" id="image_platform" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                @foreach ($image_platforms as $platform)
-                    <option value="{{ $platform }}" @if (old('image_platform', $image->image_platform) === $platform) selected @endif>{{ $platform }}</option>
+            <label for="product_id">Product name</label>
+            <select name="product_id" id="product_id" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                @foreach ($products as $product)
+                    <option value="{{ $product->id }}" @if (old('product_id', $image->product_id) === $product->id) selected @endif>{{ $product->product_name }}</option>
                 @endforeach
             </select>
-            <x-input-error :messages="$errors->get('image_platform')" class="mt-2" />
+            <x-input-error :messages="$errors->get('product_id')" class="mt-2" />    
             <label for="image_protocol">Image Protocol</label>
             <select name="image_protocol" id="image_protocol" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                 @foreach ($image_protocols as $protocol)
@@ -26,27 +26,29 @@
                 >{{ old('image_name', $image->image_name) }}</textarea>
             </div>
             <x-input-error :messages="$errors->get('image_name')" class="mt-2" />
+            <label for="image_platform">Image Platform</label>
+            <select name="image_platform" id="image_platform" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                @foreach ($image_platforms as $platform)
+                    <option value="{{ $platform }}" @if (old('image_platform', $image->image_platform) === $platform) selected @endif>{{ $platform }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('image_platform')" class="mt-2" />
             <label for="image_deploy">Image deploy command</label>
             <textarea
                 name="image_deploy"
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-            >{{ old('image_deploy', $image->image_deploy) }}</textarea>
+                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-500 rounded-md shadow-sm"
+                readonly
+                >{{ old('image_deploy', $image->image_deploy) }}</textarea>
             <x-input-error :messages="$errors->get('image_deploy')" class="mt-2" />
             <label for="image_decomission">Image decomission command</label>
             <textarea
                 name="image_decomission"
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-            >{{ old('image_decomission', $image->image_decomission) }}</textarea>
+                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-500 rounded-md shadow-sm"
+                readonly
+                >{{ old('image_decomission', $image->image_decomission) }}</textarea>
             <x-input-error :messages="$errors->get('image_decomission')" class="mt-2" />
-            <label for="product_id">Product</label>
-            <select name="product_id" id="product_id" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                @foreach ($products as $product)
-                    <option value="{{ $product->id }}" @if (old('product_id', $image->product_id) === $product->id) selected @endif>{{ $product->product_name }}</option>
-                @endforeach
-            </select>
-            <x-input-error :messages="$errors->get('product_id')" class="mt-2" />    
             <div class="mt-4 space-x-2">
-                <x-primary-button>{{ __('Save') }}</x-primary-button>
+                <x-primary-button>{{ __('Pull') }}</x-primary-button>
                 <a href="{{ route('products.index') }}">{{ __('Cancel') }}</a>
             </div>
         </form>

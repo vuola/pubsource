@@ -2,6 +2,20 @@
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
         <form method="POST" action="{{ route('devices.store') }}">
             @csrf
+            <label for="site_id">Site</label>
+            <select name="site_id" id="site_id" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                @foreach ($sites as $site)
+                    <option value="{{ $site->id }}" @if (old('site_id') === $site->id) selected @endif>{{ $site->site_name }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('site_id')" class="mt-2" />    
+            <label for="image_id">Image</label>
+            <select name="image_id" id="image_id" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                @foreach ($images as $image)
+                    <option value="{{ $image->id }}" @if (old('image_id') === $image->id) selected @endif>{{ $image->image_name }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('image_id')" class="mt-2" />    
             <label for="device_location_description">Device location description</label>
             <textarea
                 name="device_location_description"
@@ -32,20 +46,6 @@
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
             >{{ old('device_schema') }}</textarea>
             <x-input-error :messages="$errors->get('device_schema')" class="mt-2" />
-            <label for="site_id">Site</label>
-            <select name="site_id" id="site_id" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                @foreach ($sites as $site)
-                    <option value="{{ $site->id }}" @if (old('site_id') === $site->id) selected @endif>{{ $site->site_name }}</option>
-                @endforeach
-            </select>
-            <x-input-error :messages="$errors->get('site_id')" class="mt-2" />    
-            <label for="image_id">Image</label>
-            <select name="image_id" id="image_id" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                @foreach ($images as $image)
-                    <option value="{{ $image->id }}" @if (old('image_id') === $image->id) selected @endif>{{ $image->image_name }}</option>
-                @endforeach
-            </select>
-            <x-input-error :messages="$errors->get('image_id')" class="mt-2" />    
             <x-primary-button class="mt-4">{{ __('Save') }}</x-primary-button>
         </form>
         <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">

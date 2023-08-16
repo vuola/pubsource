@@ -2,44 +2,50 @@
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
         <form method="POST" action="{{ route('images.store') }}">
             @csrf
-            <textarea
-                name="image_platform"
-                placeholder="{{ __('Image platform: Docker | Kubernetes') }}"
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-            >{{ old('image_platform') }}</textarea>
-            <x-input-error :messages="$errors->get('image_platform')" class="mt-2" />
-            <textarea
-                name="image_protocol"
-                placeholder="{{ __('Image protocol: Mb_RTU | Mb_TCP | API') }}"
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-            >{{ old('image_protocol') }}</textarea>
-            <x-input-error :messages="$errors->get('image_protocol')" class="mt-2" />
-                <textarea
-                name="image_name"
-                placeholder="{{ __('Image name') }}"
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-            >{{ old('image_name') }}</textarea>
-            <x-input-error :messages="$errors->get('image_name')" class="mt-2" />
-            <textarea
-                name="image_deploy"
-                placeholder="{{ __('Image deploy command') }}"
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-            >{{ old('image_deploy') }}</textarea>
-            <x-input-error :messages="$errors->get('image_deploy')" class="mt-2" />
-                <textarea
-                name="image_decomission"
-                placeholder="{{ __('Image decomission command') }}"
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-            >{{ old('image_decomission') }}</textarea>
-            <x-input-error :messages="$errors->get('image_decomission')" class="mt-2" />
-            <label for="product_id">Product</label>
+            <label for="product_id">Product Name</label>
             <select name="product_id" id="product_id" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                 @foreach ($products as $product)
                     <option value="{{ $product->id }}" @if (old('product_id') === $product->id) selected @endif>{{ $product->product_name }}</option>
                 @endforeach
             </select>
             <x-input-error :messages="$errors->get('product_id')" class="mt-2" />    
-            <x-primary-button class="mt-4">{{ __('Save') }}</x-primary-button>
+            <label for="image_protocol">Image Protocol</label>
+            <select name="image_protocol" id="image_protocol" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                @foreach ($image_protocols as $protocol)
+                    <option value="{{ $protocol }}" @if (old('image_protocol') === $protocol) selected @endif>{{ $protocol }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('image_protocol')" class="mt-2" />
+            <label for="image_name">Image Name</label>
+            <div class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <textarea
+                    name="image_name"
+                    class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-500 rounded-md shadow-sm"
+                    readonly
+                >(productName + '_' + imageProtocol).toLowerCase().replace(/\s+/g, '_')</textarea>
+            </div>
+            <label for="image_platform">Image Platform</label>
+            <select name="image_platform" id="image_platform" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                @foreach ($image_platforms as $platform)
+                    <option value="{{ $platform }}" @if (old('image_platform') === $platform) selected @endif>{{ $platform }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('image_platform')" class="mt-2" />
+            <label for="image_deploy">Image deploy command</label>
+            <textarea
+                name="image_deploy"
+                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-500 rounded-md shadow-sm"
+                readonly
+            >retrieved from library when image is saved</textarea>
+            <x-input-error :messages="$errors->get('image_deploy')" class="mt-2" />
+            <label for="image_decomission">Image decomission command</label>
+            <textarea
+                name="image_decomission"
+                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-500 rounded-md shadow-sm"
+                readonly
+            >retrieved from library when image is saved</textarea>
+            <x-input-error :messages="$errors->get('image_decomission')" class="mt-2" />
+            <x-primary-button class="mt-4">{{ __('Pull') }}</x-primary-button>
         </form>
 
         <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">

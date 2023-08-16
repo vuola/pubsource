@@ -16,9 +16,14 @@ class ImageController extends Controller
     public function index(): View
     {
         $products = Product::all();
-
+        $image_platforms = ["Docker", "Kubernetes"];
+        $image_protocols = ["Mb_TCP", "Mb_RTU", "API"];
+        $products = Product::all();
+ 
         return view('images.index', [
             'images' => Image::latest()->get(),
+            'image_platforms' => $image_platforms,
+            'image_protocols' => $image_protocols,
             'products' => $products,
         ]);
     }
